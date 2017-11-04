@@ -34,6 +34,7 @@ namespace MyRental.ViewModels
 
         public string TestForGit { get; set; }
 		public string TestForGit2 { get; set; }
+        public string TestForGit3 { get; set; }
 
         public static CarVM MapTo(Car car)
         {
