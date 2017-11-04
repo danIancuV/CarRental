@@ -32,9 +32,6 @@ namespace MyRental.ViewModels
 
         public virtual ICollection<Reservation> Reservations { get; set; }
 
-        public string TestForGit { get; set; }
-		public string TestForGit2 { get; set; }
-
         public static CarVM MapTo(Car car)
         {
             return new CarVM
