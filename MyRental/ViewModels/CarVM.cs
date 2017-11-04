@@ -31,7 +31,9 @@ namespace MyRental.ViewModels
         public int? Consumption_km_l_ { get; set; }
 
         public virtual ICollection<Reservation> Reservations { get; set; }
-        
+
+        public string TestForGit { get; set; }
+
         public static CarVM MapTo(Car car)
         {
             return new CarVM
@@ -53,5 +55,7 @@ namespace MyRental.ViewModels
                 Type = (int)carVM.Type
             };
         }
+
+
     }
 }
