@@ -1,0 +1,83 @@
+﻿@model IEnumerable<MyRental.ViewModels.ReservationVM>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Bookings</h2>
+
+@using (Html.BeginForm("IndexBook", "Reservations", FormMethod.Get))
+{
+    <div class="input-group stylish-input-group">
+        <span class="input-group-btn">
+            @Html.TextBox("search", null, new { @class = "form-control form-control-sm", placeholder = "your SSN" })
+            <button class="btn btn-outline-secondary btn-sm" type="submit">
+                <i class="glyphicon glyphicon-search"></i>
+            </button>
+        </span>
+    </div>
+    @Html.ActionLink("<< Back", "Index", "Reservations", null, new { @class = "btn btn-primary btn-xs" })
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Customer.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Customer.SSN)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Customer.Town)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Car.Make)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Car.Type)
+        </th>
+        <th>
+            @Html.ActionLink("Start Date", "IndexBook", new { sortBy = ViewBag.StartDateSort })
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EndDate)
+        </th>
+        <th></th>
+    </tr>
+
+@if (Model.Count() == 0)
+{
+    <tr>
+        <td colspan="7" style="color:red;font-family:Arial, Helvetica, sans-serif;text-align:center">
+            No match found.
+        </td>
+    </tr>
+}
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Customer.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Customer.SSN)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Customer.Town)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Car.Make)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Car.Type)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StartDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EndDate)
+        </td>
+        
+    </tr>
+}
+
+</table>

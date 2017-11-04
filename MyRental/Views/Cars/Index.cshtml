@@ -1,0 +1,70 @@
+﻿@model IEnumerable<MyRental.ViewModels.CarVM>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Cars</h2>
+
+<p>
+    @Html.ActionLink("New Car", "Create", null, new { @class = "btn btn-default btn-xs" })
+    @Html.ActionLink("STEP 1 - New Customer", "Create", "Customers", null, new { @class = "btn btn-default btn-xs" })
+</p>
+<p>
+    @using (Html.BeginForm("Index", "Cars", FormMethod.Get))
+    {
+        <div class="input-group stylish-input-group">
+            <span class="input-group-btn">
+                @Html.TextBox("search", null, new { @class = "form-control form-control-sm", placeholder = "ex. Audi, BMW etc." })
+                <button class="btn btn-outline-secondary btn-sm" type="submit">
+                    <i class="glyphicon glyphicon-search"></i>
+                </button> 
+            </span>
+        </div>
+    @Html.ActionLink("<< Back", "Index", "Home", null, new { @class = "btn btn-primary btn-xs" })
+    }
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Make)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Type)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Consumption_km_l_)
+        </th>
+        <th></th>
+    </tr>
+
+@if (Model.Count() == 0)
+{
+    <tr>
+        <td colspan="3" style="color:red;font-family:Arial, Helvetica, sans-serif;text-align:center">
+            No match found.
+        </td>
+    </tr>         
+}
+    
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Make)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Type)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Consumption_km_l_)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.CarID }, new { @class = "btn btn-warning btn-xs" }) 
+            @Html.ActionLink("Details", "Details", new { id=item.CarID }, new { @class = "btn btn-info btn-xs" }) 
+            @Html.ActionLink("Delete", "Delete", new { id=item.CarID }, new { @class = "btn btn-danger btn-xs" })
+        </td>
+    </tr>
+}
+
+</table>
