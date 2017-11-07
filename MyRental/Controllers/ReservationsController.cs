@@ -74,16 +74,8 @@ namespace MyRental.Controllers
             }
             else
             {
-                foreach (var reservation in reservations)
-                {
-                    if (reservation.Customer.SSN == search)
-                    {
-                        var rez = ReservationVM.MapTo(reservation);
-                        rez.Car = CarVM.MapTo(db.Cars.Find(reservation.CarID));
-                        rez.Customer = CustomerVM.MapTo(db.Customers.Find(reservation.CustomerID));
-                        SSNSearchVM.Add(rez);
-                    }
-                }
+                SSNSearchVM = reservationsVM.Where(x => x.Customer.SSN == search).ToList<ReservationVM>();
+             
                 return View(SSNSearchVM);
             }       
         }

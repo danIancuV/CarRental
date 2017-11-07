@@ -32,13 +32,9 @@ namespace MyRental.Controllers
                 return View(carsVM);
             }
             //populating list with filtered cars
-            foreach (var car in cars)
-            {
-                if (car.Make.Contains(search))
-                {
-                    carsSearchVM.Add(CarVM.MapTo(car));
-                }    
-            }
+         
+            carsSearchVM = carsVM.Where(x => x.Make.Contains(search)).ToList<CarVM>(); 
+
             return View(carsSearchVM);
         }
      
