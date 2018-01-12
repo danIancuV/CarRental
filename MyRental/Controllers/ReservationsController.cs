@@ -37,6 +37,7 @@ namespace MyRental.Controllers
 
 
         // GET: IndexBook
+        [Authorize]
         public ActionResult IndexBook(string sortBy, string search)
         {
             ViewBag.StartDateSort = string.IsNullOrEmpty(sortBy) ? "StartDate desc" : "";

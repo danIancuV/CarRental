@@ -94,3 +94,4 @@ C:\Users\user\Documents\GitHub\CarRental\MyRental\bin\Microsoft.AI.Web.xml
 C:\Users\user\Documents\GitHub\CarRental\MyRental\obj\Debug\MyRental.csprojResolveAssemblyReference.cache
 C:\Users\user\Documents\GitHub\CarRental\MyRental\obj\Debug\MyRental.dll
 C:\Users\user\Documents\GitHub\CarRental\MyRental\obj\Debug\MyRental.pdb
+C:\Users\user\Documents\GitHub\CarRental\MyRental\obj\Debug\MyRental.csproj.CoreCompileInputs.cache
