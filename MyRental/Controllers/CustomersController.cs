@@ -10,7 +10,7 @@ namespace MyRental.Controllers
 {
     public class CustomersController : Controller
     {
-        private Entities db = new Entities();
+        private LocalDatabaseEntities db = new LocalDatabaseEntities();
 
         // GET: Customers
         public ActionResult Index(string sortBy)

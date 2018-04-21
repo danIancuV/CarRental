@@ -13,10 +13,10 @@ namespace MyRental.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Entities : DbContext
+    public partial class LocalDatabaseEntities : DbContext
     {
-        public Entities()
-            : base("name=Entities")
+        public LocalDatabaseEntities()
+            : base("name=LocalDatabaseEntities")
         {
         }
     

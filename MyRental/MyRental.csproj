@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -201,33 +202,30 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Car.cs">
-      <DependentUpon>Rental.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CarType.cs">
-      <DependentUpon>Rental.tt</DependentUpon>
+      <DependentUpon>LocalRentalModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Customer.cs">
-      <DependentUpon>Rental.tt</DependentUpon>
+      <DependentUpon>LocalRentalModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\LocalRentalModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LocalRentalModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LocalRentalModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LocalRentalModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LocalRentalModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LocalRentalModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\Rental.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Rental.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Rental.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Rental.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Rental.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Rental.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Models\Reservation.cs">
-      <DependentUpon>Rental.tt</DependentUpon>
+      <DependentUpon>LocalRentalModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -237,33 +235,37 @@
     <Compile Include="ViewModels\ReservationVM.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\LocalRentalDatabase.mdf" />
+    <Content Include="App_Data\LocalRentalDatabase_log.ldf">
+      <DependentUpon>LocalRentalDatabase.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\Rental.Context.tt">
+    <Content Include="Models\LocalRentalModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Rental.edmx</DependentUpon>
-      <LastGenOutput>Rental.Context.cs</LastGenOutput>
+      <DependentUpon>LocalRentalModel.edmx</DependentUpon>
+      <LastGenOutput>LocalRentalModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\Rental.tt">
+    <Content Include="Models\LocalRentalModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Rental.edmx</DependentUpon>
-      <LastGenOutput>Rental.cs</LastGenOutput>
+      <DependentUpon>LocalRentalModel.edmx</DependentUpon>
+      <LastGenOutput>LocalRentalModel.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <EntityDeploy Include="Models\Rental.edmx">
+    <EntityDeploy Include="Models\LocalRentalModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Rental.Designer.cs</LastGenOutput>
+      <LastGenOutput>LocalRentalModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\Rental.edmx.diagram">
-      <DependentUpon>Rental.edmx</DependentUpon>
+    <Content Include="Models\LocalRentalModel.edmx.diagram">
+      <DependentUpon>LocalRentalModel.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -328,9 +330,7 @@
     <Content Include="Views\Reservations\IndexBook.cshtml" />
     <Content Include="Views\Home\ExceptionHandling.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
   </ItemGroup>

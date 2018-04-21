@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="gamma.netModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="LocalDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Cars">
           <Key>
             <PropertyRef Name="CarID" />
@@ -57,7 +57,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="gammanetModelStoreContainer">
+        <EntityContainer Name="LocalDatabaseModelStoreContainer">
           <EntitySet Name="Cars" EntityType="Self.Cars" Schema="gammauser" store:Type="Tables" />
           <EntitySet Name="Customers" EntityType="Self.Customers" Schema="gammauser" store:Type="Tables" />
           <EntitySet Name="Reservations" EntityType="Self.Reservations" Schema="gammauser" store:Type="Tables" />
@@ -70,23 +70,11 @@
             <End Role="Reservations" EntitySet="Reservations" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="gamma.netModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Cars" EntityType="gamma.netModel.Car" />
-          <EntitySet Name="Customers" EntityType="gamma.netModel.Customer" />
-          <EntitySet Name="Reservations" EntityType="gamma.netModel.Reservation" />
-          <AssociationSet Name="FK_Reservations_Cars" Association="gamma.netModel.FK_Reservations_Cars">
-            <End Role="Car" EntitySet="Cars" />
-            <End Role="Reservation" EntitySet="Reservations" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Reservations_Customers" Association="gamma.netModel.FK_Reservations_Customers">
-            <End Role="Customer" EntitySet="Customers" />
-            <End Role="Reservation" EntitySet="Reservations" />
-          </AssociationSet>
-        </EntityContainer>
+      <Schema Namespace="LocalDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Car">
           <Key>
             <PropertyRef Name="CarID" />
@@ -94,8 +82,8 @@
           <Property Name="CarID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Make" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Type" Type="Int32" />
-          <NavigationProperty Name="Reservations" Relationship="gamma.netModel.FK_Reservations_Cars" FromRole="Car" ToRole="Reservation" />
           <Property Name="Consumption_km_l_" Type="Int32" />
+          <NavigationProperty Name="Reservations" Relationship="Self.FK_Reservations_Cars" FromRole="Cars" ToRole="Reservations" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
@@ -104,8 +92,8 @@
           <Property Name="CustomerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="SSN" Type="String" MaxLength="13" FixedLength="true" Unicode="false" />
-          <NavigationProperty Name="Reservations" Relationship="gamma.netModel.FK_Reservations_Customers" FromRole="Customer" ToRole="Reservation" />
           <Property Name="Town" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Reservations" Relationship="Self.FK_Reservations_Customers" FromRole="Customers" ToRole="Reservations" />
         </EntityType>
         <EntityType Name="Reservation">
           <Key>
@@ -116,75 +104,80 @@
           <Property Name="CustomerID" Type="Int32" Nullable="false" />
           <Property Name="StartDate" Type="DateTime" Precision="3" />
           <Property Name="EndDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Car" Relationship="gamma.netModel.FK_Reservations_Cars" FromRole="Reservation" ToRole="Car" />
-          <NavigationProperty Name="Customer" Relationship="gamma.netModel.FK_Reservations_Customers" FromRole="Reservation" ToRole="Customer" />
+          <NavigationProperty Name="Car" Relationship="Self.FK_Reservations_Cars" FromRole="Reservations" ToRole="Cars" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_Reservations_Customers" FromRole="Reservations" ToRole="Customers" />
         </EntityType>
         <Association Name="FK_Reservations_Cars">
-          <End Type="gamma.netModel.Car" Role="Car" Multiplicity="1" />
-          <End Type="gamma.netModel.Reservation" Role="Reservation" Multiplicity="*" />
+          <End Role="Cars" Type="Self.Car" Multiplicity="1" />
+          <End Role="Reservations" Type="Self.Reservation" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Car">
+            <Principal Role="Cars">
               <PropertyRef Name="CarID" />
             </Principal>
-            <Dependent Role="Reservation">
+            <Dependent Role="Reservations">
               <PropertyRef Name="CarID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Reservations_Customers">
-          <End Type="gamma.netModel.Customer" Role="Customer" Multiplicity="1" />
-          <End Type="gamma.netModel.Reservation" Role="Reservation" Multiplicity="*" />
+          <End Role="Customers" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Reservations" Type="Self.Reservation" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Customer">
+            <Principal Role="Customers">
               <PropertyRef Name="CustomerID" />
             </Principal>
-            <Dependent Role="Reservation">
+            <Dependent Role="Reservations">
               <PropertyRef Name="CustomerID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EnumType Name="CarType">
-          <Member Name="Small" Value="1" />
-          <Member Name="Compact" Value="2" />
-          <Member Name="Sedan" Value="3" />
-          <Member Name="Limousine" Value="4" />
-          <Member Name="Monovolume" Value="5" />
-          <Member Name="SUV" Value="6" />
-        </EnumType>
-        </Schema>
+        <EntityContainer Name="LocalDatabaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cars" EntityType="Self.Car" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="Reservations" EntityType="Self.Reservation" />
+          <AssociationSet Name="FK_Reservations_Cars" Association="Self.FK_Reservations_Cars">
+            <End Role="Cars" EntitySet="Cars" />
+            <End Role="Reservations" EntitySet="Reservations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reservations_Customers" Association="Self.FK_Reservations_Customers">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Reservations" EntitySet="Reservations" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="gammanetModelStoreContainer" CdmEntityContainer="Entities">
+        <EntityContainerMapping StorageEntityContainer="LocalDatabaseModelStoreContainer" CdmEntityContainer="LocalDatabaseEntities">
           <EntitySetMapping Name="Cars">
-            <EntityTypeMapping TypeName="gamma.netModel.Car">
+            <EntityTypeMapping TypeName="LocalDatabaseModel.Car">
               <MappingFragment StoreEntitySet="Cars">
-                <ScalarProperty Name="Consumption_km_l_" ColumnName="Consumption(km/l)" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="Make" ColumnName="Make" />
                 <ScalarProperty Name="CarID" ColumnName="CarID" />
+                <ScalarProperty Name="Make" ColumnName="Make" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Consumption_km_l_" ColumnName="Consumption(km/l)" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Customers">
-            <EntityTypeMapping TypeName="gamma.netModel.Customer">
+            <EntityTypeMapping TypeName="LocalDatabaseModel.Customer">
               <MappingFragment StoreEntitySet="Customers">
-                <ScalarProperty Name="Town" ColumnName="Town" />
-                <ScalarProperty Name="SSN" ColumnName="SSN" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="SSN" ColumnName="SSN" />
+                <ScalarProperty Name="Town" ColumnName="Town" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Reservations">
-            <EntityTypeMapping TypeName="gamma.netModel.Reservation">
+            <EntityTypeMapping TypeName="LocalDatabaseModel.Reservation">
               <MappingFragment StoreEntitySet="Reservations">
-                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
-                <ScalarProperty Name="CarID" ColumnName="CarID" />
                 <ScalarProperty Name="ReservationID" ColumnName="ReservationID" />
+                <ScalarProperty Name="CarID" ColumnName="CarID" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

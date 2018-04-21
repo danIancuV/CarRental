@@ -23,7 +23,7 @@ namespace MyRental.ViewModels
         
         [Display(Name = "Car Type")]
         [Required]
-        public CarType Type { get; set; }
+        public CarTypeVM Type { get; set; }
 
         [Display(Name = "Car Consumption[km/l]")]
         [Required]
@@ -39,7 +39,7 @@ namespace MyRental.ViewModels
                 CarID = car.CarID,
                 Make = car.Make,
                 Consumption_km_l_ = car.Consumption_km_l_,
-                Type = (CarType)car.Type
+                Type = (CarTypeVM)car.Type
             };
         }
 

@@ -10,7 +10,7 @@ namespace MyRental.Controllers
 {
     public class CarsController : Controller
     {
-        private Entities db = new Entities();
+        private LocalDatabaseEntities db = new LocalDatabaseEntities();
 
         // GET: Cars
         public ActionResult Index(string search)

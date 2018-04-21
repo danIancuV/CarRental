@@ -10,7 +10,7 @@ namespace MyRental.Controllers
 {
     public class ReservationsController : Controller
     {
-        private Entities db = new Entities();
+        private LocalDatabaseEntities db = new LocalDatabaseEntities();
 
         // GET: Reservations
         public ActionResult Index()
