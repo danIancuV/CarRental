@@ -235,10 +235,6 @@
     <Compile Include="ViewModels\ReservationVM.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\LocalRentalDatabase.mdf" />
-    <Content Include="App_Data\LocalRentalDatabase_log.ldf">
-      <DependentUpon>LocalRentalDatabase.mdf</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -330,7 +326,9 @@
     <Content Include="Views\Reservations\IndexBook.cshtml" />
     <Content Include="Views\Home\ExceptionHandling.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
   </ItemGroup>
