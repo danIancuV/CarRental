@@ -192,3 +192,4 @@ D:\App\CarRental\MyRental\obj\Debug\MyRental.csproj.CoreCompileInputs.cache
 D:\App\CarRental\MyRental\obj\Debug\MyRental.csproj.CopyComplete
 D:\App\CarRental\MyRental\obj\Debug\MyRental.dll
 D:\App\CarRental\MyRental\obj\Debug\MyRental.pdb
+D:\App\CarRental\MyRental\obj\Debug\MyRental.csprojAssemblyReference.cache
